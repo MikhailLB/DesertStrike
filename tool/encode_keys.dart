@@ -95,9 +95,9 @@ void main() {
       'WebKit version fragment for the User-Agent',
       '537.36');
   _emit('trackerKey',
-      'AppsFlyer Dev Key (placeholder — replace when AF dashboard supplies it)',
-      'AF_DEV_KEY_PLACEHOLDER');
+      'AppsFlyer Dev Key',
+      'RokekoTvCwUmenrW3CzKHS');
   _emit('messagingProject',
-      'Firebase project number (placeholder — replace when Firebase is created)',
-      '000000000000');
+      'Firebase project number (desertsrike-f5bf3)',
+      '770864626410');
 }

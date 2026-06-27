@@ -37,15 +37,18 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
-            <!-- AppsFlyer OneLink (host is filled in once the dashboard
-                 issues a subdomain for this title). -->
+            <!-- AppsFlyer OneLink — subdomain + path prefix issued by the
+                 AppsFlyer dashboard. Both schemes are listed so cold and
+                 warm taps from the OneLink template resolve correctly. -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:scheme="http" />
                 <data
-                    android:scheme="https"
-                    android:host="desertstrike.onelink.me" />
+                    android:host="desertstrike.onelink.me"
+                    android:pathPrefix="/TykG" />
             </intent-filter>
         </activity>
 
