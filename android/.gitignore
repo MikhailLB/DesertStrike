@@ -13,6 +13,10 @@ key.properties
 **/*.keystore
 **/*.jks
 
-# Firebase / Google Cloud credentials — never commit
-app/google-services.json
+# Firebase / Google Cloud credentials — by default kept out of the repo.
+# The DesertStrike build deliberately commits the JSON so the
+# `com.google.gms.google-services` Gradle plugin picks it up on a clean
+# clone without any local file copy. Re-enable the ignore rule if you ever
+# rotate the Firebase project key.
+# app/google-services.json
 GoogleService-Info.plist

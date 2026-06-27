@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "770864626410",
+    "project_id": "desertsrike-f5bf3",
+    "storage_bucket": "desertsrike-f5bf3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770864626410:android:9833f469ff7a2cbdb1b593",
+        "android_client_info": {
+          "package_name": "com.chaosdesert.desertstrike"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvOVHe1aM6NnPymypfG0M7sJa68HFV3H8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
