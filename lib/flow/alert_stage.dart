@@ -98,9 +98,9 @@ class _AlertStageState extends State<AlertStage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    _PharaohAcceptButton(onTap: _onAccept),
+                    _PharaohButton(label: 'Accept', onTap: _onAccept),
                     const SizedBox(height: 14),
-                    _DesertSkipLink(onTap: _onSkip),
+                    _PharaohButton(label: 'Skip', onTap: _onSkip),
                   ],
                 ),
               )
@@ -114,13 +114,21 @@ class _AlertStageState extends State<AlertStage> {
                   children: <Widget>[
                     SizedBox(
                       width: size.width * 0.34,
-                      child: _PharaohAcceptButton(
+                      child: _PharaohButton(
+                        label: 'Accept',
                         onTap: _onAccept,
                         compact: true,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    _DesertSkipLink(onTap: _onSkip, compact: true),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: size.width * 0.34,
+                      child: _PharaohButton(
+                        label: 'Skip',
+                        onTap: _onSkip,
+                        compact: true,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -131,15 +139,20 @@ class _AlertStageState extends State<AlertStage> {
   }
 }
 
-class _PharaohAcceptButton extends StatefulWidget {
+class _PharaohButton extends StatefulWidget {
+  final String label;
   final VoidCallback onTap;
   final bool compact;
-  const _PharaohAcceptButton({required this.onTap, this.compact = false});
+  const _PharaohButton({
+    required this.label,
+    required this.onTap,
+    this.compact = false,
+  });
   @override
-  State<_PharaohAcceptButton> createState() => _PharaohAcceptButtonState();
+  State<_PharaohButton> createState() => _PharaohButtonState();
 }
 
-class _PharaohAcceptButtonState extends State<_PharaohAcceptButton>
+class _PharaohButtonState extends State<_PharaohButton>
     with SingleTickerProviderStateMixin {
   late final AnimationController _shine;
   late final Animation<double> _shineAnim;
@@ -211,7 +224,7 @@ class _PharaohAcceptButtonState extends State<_PharaohAcceptButton>
             ),
             child: Center(
               child: Text(
-                'Accept',
+                widget.label,
                 style: TextStyle(
                   color: const Color(0xFF2C1606),
                   fontSize: widget.compact ? 17 : 21,
@@ -219,53 +232,6 @@ class _PharaohAcceptButtonState extends State<_PharaohAcceptButton>
                   letterSpacing: 1.1,
                 ),
               ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _DesertSkipLink extends StatefulWidget {
-  final VoidCallback onTap;
-  final bool compact;
-  const _DesertSkipLink({required this.onTap, this.compact = false});
-  @override
-  State<_DesertSkipLink> createState() => _DesertSkipLinkState();
-}
-
-class _DesertSkipLinkState extends State<_DesertSkipLink> {
-  bool _pressed = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _pressed = true),
-      onTapUp: (_) {
-        setState(() => _pressed = false);
-        widget.onTap();
-      },
-      onTapCancel: () => setState(() => _pressed = false),
-      child: AnimatedOpacity(
-        opacity: _pressed ? 0.55 : 0.92,
-        duration: const Duration(milliseconds: 80),
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: widget.compact ? 4 : 8),
-          child: Text(
-            'Skip',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: widget.compact ? 16 : 21,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.0,
-              shadows: const <Shadow>[
-                Shadow(
-                  color: Colors.black87,
-                  blurRadius: 6,
-                  offset: Offset(0, 2),
-                ),
-              ],
             ),
           ),
         ),
