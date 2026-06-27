@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Status-bar / notification icon for DesertStrike — a stylised flame.
-  Per Android guidelines:
-    * monochrome white on transparent background
-    * different from the launcher icon
-    * 24×24 dp viewport (system tints with the channel colour)
+  Status-bar / notification icon for DesertStrike.
+  A clean teardrop flame with a small swirl on top — derived from the
+  Material `whatshot` glyph (Apache 2.0). Solid white on transparent
+  background, 24×24dp viewport, distinct from the launcher icon.
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
@@ -13,5 +12,5 @@
     android:viewportHeight="24">
     <path
         android:fillColor="#FFFFFFFF"
-        android:pathData="M13.5,0.67c0,0 1.2,1.78 1.2,3.21c0,1.37 -0.9,2.49 -2.27,2.49c-1.38,0 -2.41,-1.12 -2.41,-2.49l0.02,-0.24c-1.35,1.61 -2.16,3.69 -2.16,5.95c0,3.4 2.74,6.16 6.12,6.16c3.39,0 6.13,-2.76 6.13,-6.16c0,-3.99 -1.92,-7.5 -4.63,-9.92zM12.86,18.69c-1.61,0 -2.91,-1.26 -2.91,-2.82c0,-1.46 0.94,-2.5 2.55,-2.83c1.61,-0.33 3.28,-1.11 4.22,-2.34c0.36,1.19 0.55,2.45 0.55,3.74c0,2.34 -1.91,4.25 -4.41,4.25z"/>
+        android:pathData="M13.5,0.67c0,0 0.74,2.65 0.74,4.8c0,2.06 -1.35,3.73 -3.41,3.73c-2.07,0 -3.63,-1.67 -3.63,-3.73l0.03,-0.36C5.21,7.51 4,10.62 4,14c0,4.42 3.58,8 8,8s8,-3.58 8,-8C20,8.61 17.41,3.8 13.5,0.67zM11.71,19c-1.78,0 -3.22,-1.4 -3.22,-3.14c0,-1.62 1.05,-2.76 2.81,-3.12c1.77,-0.36 3.6,-1.21 4.62,-2.58c0.39,1.29 0.59,2.65 0.59,4.04C16.5,16.88 14.36,19 11.71,19z"/>
 </vector>

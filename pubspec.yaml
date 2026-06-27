@@ -49,8 +49,13 @@ flutter_launcher_icons:
   image_path: "assets/icon.png"
   min_sdk_android: 21
   remove_alpha_ios: true
-  adaptive_icon_background: "assets/icon.png"
-  adaptive_icon_foreground: "assets/icon_transparent.png"
+  # Adaptive icon: the foreground PNG already contains the artwork scaled to
+  # 70% of the 1024×1024 canvas with transparent padding, so every Android
+  # mask shape (circle, squircle, square, rounded square, …) keeps the full
+  # image visible without any edge cropping. The background is the dominant
+  # warm tone sampled from the artwork.
+  adaptive_icon_background: "#341100"
+  adaptive_icon_foreground: "assets/icon_foreground.png"
 
 flutter:
   uses-material-design: true
