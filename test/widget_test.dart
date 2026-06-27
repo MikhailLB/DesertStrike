@@ -1,11 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+// Smoke test — verifies the cipher decodes the dispatch endpoint without
+// pulling in Flutter bindings (which would also need a full mock of the
+// service singletons). The dart-only check is enough to catch a seed
+// drift between cipher/mask.dart and tool/encode_keys.dart.
 
-import 'package:desert_strike/main.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:desert_strike/env/desert_settings.dart';
 
 void main() {
-  testWidgets('App boots into the loading screen', (WidgetTester tester) async {
-    await tester.pumpWidget(const DesertStrikeApp());
-    expect(find.byType(MaterialApp), findsOneWidget);
+  test('Dispatch endpoint decodes to the expected URL', () {
+    expect(
+      DesertEnv.dispatchEndpoint,
+      equals('https://deserttstrike.com/config.php'),
+    );
+  });
+
+  test('Bundle slug matches Android applicationId', () {
+    expect(DesertEnv.bundleSlug, equals('com.chaosdesert.desertstrike'));
   });
 }

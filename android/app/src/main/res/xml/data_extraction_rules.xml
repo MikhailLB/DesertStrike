@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Auto-backup is disabled at the application level (android:allowBackup=false
+  in the manifest). The empty rules below silence the Android 12+ warning
+  that complains when neither auto-backup nor device-to-device transfer is
+  configured.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+    </cloud-backup>
+    <device-transfer>
+    </device-transfer>
+</data-extraction-rules>
