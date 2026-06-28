@@ -4,6 +4,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:http/http.dart' as http;
 
 import '../cipher/mask.dart';
+import '../env/desert_settings.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  AgentClient — outbound HTTP with a real-device User-Agent
@@ -47,9 +48,17 @@ class AgentClient extends http.BaseClient {
 
   /// Reads actual device fields and assembles the User-Agent. Must be called
   /// once during boot, before any outbound request happens.
+  ///
+  /// The browser segment is followed by an identity tail that carries the
+  /// app bundle id and a space-free app name, so partner-side fingerprints
+  /// can distinguish DesertStrike traffic from a stock browser session:
+  ///
+  ///   `[browser UA] appid/com.chaosdesert.desertstrike appname/DesertStrike`
   Future<void> warm() async {
     final chromeVer = _unwrapChrome();
     final webkitVer = _unwrapWebkit();
+    final tail =
+        'appid/${DesertEnv.bundleSlug} appname/${DesertEnv.displayName}';
 
     try {
       final probe = DeviceInfoPlugin();
@@ -61,26 +70,29 @@ class AgentClient extends http.BaseClient {
         final build = a.display.isNotEmpty ? a.display : a.id;
         _ua = 'Mozilla/5.0 (Linux; Android $apiLevel; $brand $model '
             'Build/$build) AppleWebKit/$webkitVer (KHTML, like Gecko) '
-            'Chrome/$chromeVer Mobile Safari/$webkitVer';
+            'Chrome/$chromeVer Mobile Safari/$webkitVer $tail';
       } else if (Platform.isIOS) {
         final i = await probe.iosInfo;
         final ver = i.systemVersion.replaceAll('.', '_');
         _ua = 'Mozilla/5.0 (iPhone; CPU iPhone OS $ver like Mac OS X) '
             'AppleWebKit/$webkitVer (KHTML, like Gecko) '
-            'Version/${i.systemVersion} Mobile/15E148 Safari/$webkitVer';
+            'Version/${i.systemVersion} Mobile/15E148 Safari/$webkitVer '
+            '$tail';
       } else {
         _ua = 'Mozilla/5.0 (Linux; Android 14; Pixel 8 Build/UD1A.230803.041) '
             'AppleWebKit/$webkitVer (KHTML, like Gecko) Chrome/$chromeVer '
-            'Mobile Safari/$webkitVer';
+            'Mobile Safari/$webkitVer $tail';
       }
     } catch (_) {
       _ua = 'Mozilla/5.0 (Linux; Android 14; Pixel 8 Build/UD1A.230803.041) '
           'AppleWebKit/$webkitVer (KHTML, like Gecko) Chrome/$chromeVer '
-          'Mobile Safari/$webkitVer';
+          'Mobile Safari/$webkitVer $tail';
     }
   }
 
-  String get userAgent => _ua.isEmpty ? 'Mozilla/5.0' : _ua;
+  String get userAgent => _ua.isEmpty
+      ? 'Mozilla/5.0 appid/${DesertEnv.bundleSlug} appname/${DesertEnv.displayName}'
+      : _ua;
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) {

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Cleartext is permitted so the WebView and the push redirect can follow
+  http:// links served by partner/redirector hosts (some affiliate chains
+  start at http://afsub.com/push/ or similar plain-HTTP entry points).
+  Without this, Android blocks the navigation with
+  `net::ERR_CLEARTEXT_NOT_PERMITTED` and the bundled error page is shown.
+-->
 <network-security-config>
-    <base-config cleartextTrafficPermitted="false">
+    <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
         </trust-anchors>
